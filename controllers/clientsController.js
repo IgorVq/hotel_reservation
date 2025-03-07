@@ -117,6 +117,19 @@ async function findClientByTopCostBooking(req, res){
     }
 }
 
+async function findOneClient(req, res){
+    try {
+        const clients = await ClientService.findOneClient(req.params.id);
+        res.status(200);
+        res.json(clients);
+    } catch (error)
+     {
+        console.error(error);
+        res.status(500);
+        res.json({"message": "Une erreur est survenue lors de la récupération du client qui a reservé pour le montant le plus élevé"});
+    }
+}
+
 module.exports = {
     findAllClients,
     findClientsByBookingYear,
@@ -127,4 +140,5 @@ module.exports = {
     findClientsByBookingYearMonth,
     findClientsByBookingType,
     findClientByTopCostBooking,
+    findOneClient,
 };

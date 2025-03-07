@@ -6,6 +6,10 @@ const swaggerDocument = require('./swagger.json');
 const port = 3000;
 const roomsRoutes = require ('./routes/roomsRoutes');
 const clientsRoutes = require ('./routes/clientsRoutes');
+const reservationsRoutes = require ('./routes/reservationsRoutes');
+const paymentsRoutes = require ('./routes/paymentsRoutes');
+const servicesRoutes = require ('./routes/servicesRoutes');
+const inclusionsRoutes = require ('./routes/inclusionsRoutes');
 
 //précise à mon api que je vais utiliser du JSON
 app.use(express.json());
@@ -14,6 +18,11 @@ app.use(express.json());
 //ATTENTION: toutes les routes de roomsRoutes.js commencent par /rooms
 app.use('/rooms', roomsRoutes);
 app.use('/clients', clientsRoutes);
+app.use('/reservations', reservationsRoutes);
+app.use('/payments', paymentsRoutes);
+app.use('/services', servicesRoutes);
+app.use('/inclusions', inclusionsRoutes);
+
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

@@ -20,4 +20,6 @@ router.get('/booking/:year/:month', (req, res) => {clientsController.findClients
 
 router.get('/registrationDate/:year/:month', (req, res) => {clientsController.findClientsByRegistrationDate(req, res)});
 
+router.get('/:id', (req, res) => {clientsController.findOneClient(req, res)});
+
 module.exports = router;

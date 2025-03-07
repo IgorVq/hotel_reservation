@@ -7,7 +7,7 @@ router.get('/', (req, res) => {roomsController.findAllRooms(req, res)});
 
 router.get('/available', (req, res) => {roomsController.findAvailableRooms(req, res)});
 
-router.get('/average_capacity', (req, res) => {roomsController.findAverageRoomsCapacity(req, res)});
+router.get('/averageCapacity', (req, res) => {roomsController.findAverageRoomsCapacity(req, res)});
 
 router.get('/priceAbove/:price', (req, res) => {roomsController.findRoomsPriceAbove(req, res)});
 
