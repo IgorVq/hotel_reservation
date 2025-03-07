@@ -19,7 +19,7 @@ function findInclusionsByReservation(idReservation){
 }
 
 function findTotalPriceByReservation(idReservation){
-    return connection.promise().query('select sum(total_price) from service_usage inner join reservation on reservation.id_reservation = service_usage.id_reservation where reservation.id_reservation = ?', [idReservation]).then((results) => {
+    return connection.promise().query('select sum(total_price) as total_price from service_usage inner join reservation on reservation.id_reservation = service_usage.id_reservation where reservation.id_reservation = ?', [idReservation]).then((results) => {
         return results[0][0];
     });
 }

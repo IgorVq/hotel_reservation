@@ -2595,6 +2595,103 @@
                     }
                 }
             }
+        },
+        "/inclusions/services/reservation/{id_reservation}/totalPrice": {
+            "get": {
+                "operationId": "inclusions_servicesTotalPrice_reservation",
+                "tags": [
+                    "Inclusions"
+                ],
+                "description": "Récupère le total des prix des services pour une reservation donnée",
+                "parameters": [
+                    {
+                        "name": "id_reservation",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                                "properties": {
+                                    "total_price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/inclusions/reservations/service/{service_name}": {
+            "get": {
+                "operationId": "inclusions_reservations_service",
+                "tags": [
+                    "Inclusions"
+                ],
+                "description": "Récupère les reservations qui contiennent le service donné",
+                "parameters": [
+                    {
+                        "name": "service_name",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id_reservation": {
+                                        "type": "integer"
+                                    },
+                                    "id_client": {
+                                        "type": "integer"
+                                    },
+                                    "id_room": {
+                                        "type": "integer"
+                                    },
+                                    "check_in_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "check_out_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "total_cost": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "reservation_status": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
         }
     }
 }
