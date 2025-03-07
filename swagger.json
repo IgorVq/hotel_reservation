@@ -1815,25 +1815,19 @@
                 }
             }
         },
-        "/payments/total/status/{status}": {
+        "/payments/total/reservationsStatus/{status}": {
             "get": {
-                "operationId": "payments_total_date",
+                "operationId": "payments_total_reservationsStatus",
                 "tags": [
                     "Payments"
                 ],
-                "description": "Récupère le montant total des paiments effectués durant une année et un mois donnée",
+                "description": "Récupère le montant total des paiments effectués selon le status de la reservation",
                 "parameters": [
                     {
-                        "name": "year",
+                        "name": "status",
                         "in": "path",
                         "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "month",
-                        "in": "path",
-                        "required": true,
-                        "type": "integer"
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -1994,6 +1988,600 @@
                                     },
                                     "payment_method": {
                                         "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "_comment": "Services",
+        "/services": {
+            "get": {
+                "operationId": "services",
+                "tags": [
+                    "Services"
+                ],
+                "description": "Récupère la liste des services",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id_service": {
+                                        "type": "integer"
+                                    },
+                                    "service_name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/services/{id}": {
+            "get": {
+                "operationId": "services_id",
+                "tags": [
+                    "Services"
+                ],
+                "description": "Récupère un service selon son id",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                                "properties": {
+                                    "id_service": {
+                                        "type": "integer"
+                                    },
+                                    "service_name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/services/priceAbove/{price}": {
+            "get": {
+                "operationId": "services_priceAbove",
+                "tags": [
+                    "Services"
+                ],
+                "description": "Récupère la liste des services ayant un prix supérieur à un montant donné",
+                "parameters": [
+                    {
+                        "name": "price",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id_service": {
+                                        "type": "integer"
+                                    },
+                                    "service_name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/services/priceBelow/{price}": {
+            "get": {
+                "operationId": "services_priceBelow",
+                "tags": [
+                    "Services"
+                ],
+                "description": "Récupère la liste des services ayant un prix inferieur à un montant donné",
+                "parameters": [
+                    {
+                        "name": "price",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id_service": {
+                                        "type": "integer"
+                                    },
+                                    "service_name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/services/mostUsed": {
+            "get": {
+                "operationId": "services_mostUsed",
+                "tags": [
+                    "Services"
+                ],
+                "description": "Récupère la liste des services avec leurs nombre d'utilisations classé par ordre décroissant",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id_service": {
+                                        "type": "integer"
+                                    },
+                                    "service_name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "uses": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/services/lessExpensive": {
+            "get": {
+                "operationId": "services_lessExpensive",
+                "tags": [
+                    "Services"
+                ],
+                "description": "Récupère le service le moins chère",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                                "properties": {
+                                    "id_service": {
+                                        "type": "integer"
+                                    },
+                                    "service_name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/services/mostExpensive": {
+            "get": {
+                "operationId": "services_mostExpensive",
+                "tags": [
+                    "Services"
+                ],
+                "description": "Récupère le service le plus chère",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                                "properties": {
+                                    "id_service": {
+                                        "type": "integer"
+                                    },
+                                    "service_name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "_comment": "Inclusions",
+        "/inclusions": {
+            "get": {
+                "operationId": "inclusions",
+                "tags": [
+                    "Inclusions"
+                ],
+                "description": "Récupère la liste des inclusions",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id_service_usage": {
+                                        "type": "integer"
+                                    },
+                                    "quantity": {
+                                        "type": "integer"
+                                    },
+                                    "total_price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "id_service": {
+                                        "type": "integer"
+                                    },
+                                    "id_reservation": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/inclusions/{id}": {
+            "get": {
+                "operationId": "inclusions_id",
+                "tags": [
+                    "Inclusions"
+                ],
+                "description": "Récupère une inclusion selon son id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                                "properties": {
+                                    "id_service_usage": {
+                                        "type": "integer"
+                                    },
+                                    "quantity": {
+                                        "type": "integer"
+                                    },
+                                    "total_price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "id_service": {
+                                        "type": "integer"
+                                    },
+                                    "id_reservation": {
+                                        "type": "integer"
+                                    }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/inclusions/services/reservation/{id_reservation}": {
+            "get": {
+                "operationId": "inclusions_services_idReservation",
+                "tags": [
+                    "Inclusions"
+                ],
+                "description": "Récupère la liste des services selon l'id de la reservation",
+                "parameters": [
+                    {
+                        "name": "id_reservation",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id_service": {
+                                        "type": "integer"
+                                    },
+                                    "service_name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/inclusions/services/reservation/roomType/{type}": {
+            "get": {
+                "operationId": "inclusions_services_room_type",
+                "tags": [
+                    "Inclusions"
+                ],
+                "description": "Récupère la liste des services selon le type de chambre (simple, double, suite)",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id_service": {
+                                        "type": "integer"
+                                    },
+                                    "service_name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/inclusions/services/reservation/totalCostBelow/{price}": {
+            "get": {
+                "operationId": "inclusions_services_totalCostBelow",
+                "tags": [
+                    "Inclusions"
+                ],
+                "description": "Récupère la liste des services pour les reservations ayant un cout total inférieur à un montant donné",
+                "parameters": [
+                    {
+                        "name": "price",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id_service": {
+                                        "type": "integer"
+                                    },
+                                    "service_name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/inclusions/services/reservation/totalCostAbove/{price}": {
+            "get": {
+                "operationId": "inclusions_services_totalCostAbove",
+                "tags": [
+                    "Inclusions"
+                ],
+                "description": "Récupère la liste des services pour les reservations ayant un cout total supérieur à un montant donné",
+                "parameters": [
+                    {
+                        "name": "price",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id_service": {
+                                        "type": "integer"
+                                    },
+                                    "service_name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float"
                                     }
                                 }
                             }

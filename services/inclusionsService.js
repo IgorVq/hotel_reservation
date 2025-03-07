@@ -37,13 +37,13 @@ function findReservationsByService(serviceName){
 }
 
 function findServicesByReservationTotalCostBelow(price){
-    return connection.promise().query('SELECT service_name FROM services INNER JOIN service_usage ON service_usage.id_service=services.id_service INNER JOIN reservation ON reservation.id_reservation = service_usage.id_reservation WHERE total_cost < ?', [price]).then((results) => {
+    return connection.promise().query('SELECT services.* FROM services INNER JOIN service_usage ON service_usage.id_service=services.id_service INNER JOIN reservation ON reservation.id_reservation = service_usage.id_reservation WHERE total_cost < ?', [price]).then((results) => {
         return results[0];
     });
 }
 
 function findServicesByReservationTotalCostAbove(price){
-    return connection.promise().query('SELECT service_name FROM services INNER JOIN service_usage ON service_usage.id_service=services.id_service INNER JOIN reservation ON reservation.id_reservation = service_usage.id_reservation WHERE total_cost > ?', [price]).then((results) => {
+    return connection.promise().query('SELECT services.* FROM services INNER JOIN service_usage ON service_usage.id_service=services.id_service INNER JOIN reservation ON reservation.id_reservation = service_usage.id_reservation WHERE total_cost > ?', [price]).then((results) => {
         return results[0];
     });
 }

@@ -8,7 +8,7 @@ router.get('/total/date/:year/:month', (req, res) => {paymentsController.totalPa
 router.get('/priceAbove/:price', (req, res) => {paymentsController.priceAbove(req, res)});
 router.get('/priceBelow/:price', (req, res) => {paymentsController.priceBelow(req, res)});
 router.get('/reservationsStatus/:status', (req, res) => {paymentsController.reservationsStatus(req, res)});
-router.get('/total/status/:status', (req, res) => {paymentsController.totalPaymentsByStatus(req, res)});
+router.get('/total/reservationsStatus/:status', (req, res) => {paymentsController.totalPaymentsByStatus(req, res)});
 router.get('/:id', (req, res) => {paymentsController.findOnePayment(req, res)});
 
 module.exports = router;
